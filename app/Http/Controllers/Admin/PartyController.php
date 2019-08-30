@@ -92,6 +92,7 @@ class PartyController extends AdminController
         // Same as doing 'Company $company' in the parameters
         //$company = new Company();
         $categories = Category::orderBy('title', 'asc')->get();//->pluck('title', 'id');
+        //$tags = $company->tags;
         //$categories->prepend('Please Select', '');
         return view('admin.party.create', compact('company', 'categories'));
     }
@@ -115,7 +116,24 @@ class PartyController extends AdminController
         // TODO: look for duplicate filenames for image
         $data = $this->handleRequest($request);
 
-        $request->user()->companies()->create($data);
+        $newCompany = $request->user()->companies()->create($data);
+
+        $newCompany->createTags($data["tags"]);
+//https://laracasts.com/discuss/channels/eloquent/eloquent-attach-method-for-multiple-inserts-into-a-pivot-table
+// try
+// {
+//     $repository->createJob($request->except('tags'));
+//     $repository->createTags($request->input('tags'));
+//     $repository->save();
+// }
+// catch (FailedJobCreateException $e)
+// {
+//     return Redirect::back()
+//         ->withErrors($e->getErrors())
+//         ->withInput($request->all());
+// }
+
+
 
         //$request->user()->companies()->create($request->all());
         // you can use the route function redirect(route('admin.blog'))

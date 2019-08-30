@@ -24,8 +24,14 @@ class Company extends Model
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * Get the Company tags.
+     *
+     * @return array
+     */
     public function tags()
     {
+        // Many To Many Relation
         return $this->belongsToMany(Tag::class);
     }
 
@@ -44,6 +50,29 @@ class Company extends Model
     public function createComment(array $data)
     {
         $this->comments()->create($data);
+    }
+
+    public function createTags($tagString)
+    {
+        $tags = explode(",", $tagString);
+        $tagIds = [];
+
+        foreach ($tags as $tag) 
+        {        
+            //$newTag = new Tag();
+            // The first array is the search criteria. While the second array is the model attribute. If the record was not found, the first and second arrays will be merged which will be used as the model attributes.
+            $newTag = Tag::firstOrCreate(
+                ['slug' => str_slug($tag)], ['name' => trim($tag)]
+            );
+
+            $newTag->name = ucwords(trim($tag));
+            $newTag->slug = str_slug($tag);
+            $newTag->save();  
+
+            $tagIds[] = $newTag->id;
+        }
+
+        $this->tags()->attach($tagIds);
     }
 
     public function getImageUrlAttribute($value) {
