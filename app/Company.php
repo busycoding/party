@@ -32,6 +32,7 @@ class Company extends Model
     public function tags()
     {
         // Many To Many Relation
+        // Does not use save or create, belongsToMany uses attach
         return $this->belongsToMany(Tag::class);
     }
 
@@ -57,7 +58,7 @@ class Company extends Model
         $tags = explode(",", $tagString);
         $tagIds = [];
 
-        foreach ($tags as $tag) 
+/*        foreach ($tags as $tag) 
         {        
             //$newTag = new Tag();
             // The first array is the search criteria. While the second array is the model attribute. If the record was not found, the first and second arrays will be merged which will be used as the model attributes.
@@ -65,14 +66,28 @@ class Company extends Model
                 ['slug' => str_slug($tag)], ['name' => trim($tag)]
             );
 
-            $newTag->name = ucwords(trim($tag));
-            $newTag->slug = str_slug($tag);
+            //$newTag->name = ucwords(trim($tag));
+            //$newTag->slug = str_slug($tag);
             $newTag->save();  
 
             $tagIds[] = $newTag->id;
         }
 
-        $this->tags()->attach($tagIds);
+        $this->tags()->detach();
+        $this->tags()->attach($tagIds);*/
+
+
+        foreach ($tags as $tag)
+        {
+            $newTag = Tag::firstOrCreate([
+                'slug' => str_slug($tag),
+                'name' => ucwords(trim($tag))
+            ]);
+
+            $tagIds[] = $newTag->id;
+        }
+
+        $this->tags()->sync($tagIds);
     }
 
     public function getImageUrlAttribute($value) {

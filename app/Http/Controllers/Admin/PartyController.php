@@ -92,9 +92,11 @@ class PartyController extends AdminController
         // Same as doing 'Company $company' in the parameters
         //$company = new Company();
         $categories = Category::orderBy('title', 'asc')->get();//->pluck('title', 'id');
-        //$tags = $company->tags;
+
+        $tags = [];
+
         //$categories->prepend('Please Select', '');
-        return view('admin.party.create', compact('company', 'categories'));
+        return view('admin.party.create', compact('company', 'categories', 'tags'));
     }
 
     /**
@@ -194,7 +196,10 @@ class PartyController extends AdminController
     {
         $company = Company::findOrFail($id);
         $categories = Category::orderBy('title', 'asc')->get();
-        return view("admin.party.edit", compact('company', 'categories'));
+
+        $tags = $company->tags->pluck('name');
+
+        return view("admin.party.edit", compact('company', 'categories', 'tags'));
     }
 
     /**
@@ -209,8 +214,10 @@ class PartyController extends AdminController
         $company  = Company::findOrFail($id);
         $oldImage = $company->image;
         $data     = $this->handleRequest($request);
-        $company->update($data);
 
+        $company->update($data);
+        $company->createTags($data['tags']);
+        
         if ($oldImage !== $company->image) {
             $this->removeImage($oldImage);
         }

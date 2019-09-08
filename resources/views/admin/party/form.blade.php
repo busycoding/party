@@ -85,7 +85,9 @@
 	                <label for="tags" class="col-md-4 col-form-label text-md-right">{{ __('Tags') }}</label>
 
 	                <div class="col-md-6">
-	                    <input id="tags" type="text" class="form-control" name="tags" value="{{ old('tags', $company->tags) }}">
+	                	<div style="display:none;">@if (old('tags')) {{ old('tags', $tags) }} @else @foreach ($tags as $tag){{ $tag }},@endforeach @endif</div>
+	                	<!-- loading tags from script -->
+	                    <input id="tags" type="text" class="form-control" name="tags" value="">
 
 	                    @if ($errors->has('tags'))
 	                        <span class="help-block" role="alert">
