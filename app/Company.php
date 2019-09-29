@@ -33,7 +33,7 @@ class Company extends Model
     {
         // Many To Many Relation
         // Does not use save or create, belongsToMany uses attach
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class); //'App\Tag'
     }
 
     public function comments()
@@ -88,6 +88,11 @@ class Company extends Model
         }
 
         $this->tags()->sync($tagIds);
+    }
+
+    public function getTagsListAttribute()
+    {
+        return $this->tags->pluck('name');
     }
 
     public function getImageUrlAttribute($value) {

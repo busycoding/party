@@ -83,3 +83,5 @@ Route::get('/admin/users/confirm/{user}', [
 ]);
 
 Route::resource('/admin/users', 'Admin\UsersController');
+
+Route::resource('/admin/tags', 'Admin\TagController', ['as' => 'admin']);

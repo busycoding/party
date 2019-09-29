@@ -2,8 +2,8 @@
 	<thead>
 		<tr>
 			<td>Action</td>
-			<td>Category Name</td>
-			<td>Post Count</td>
+			<td>Name</td>
+			<td>Company Count</td>
 		</tr>
 	</thead>
 	<tbody>

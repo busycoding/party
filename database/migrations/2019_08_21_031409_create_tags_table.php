@@ -26,9 +26,17 @@ class CreateTagsTable extends Migration
         });
 
         Schema::create('company_tag', function (Blueprint $table) {
-            $table->integer('company_id');
-            $table->integer('tag_id');
-            $table->primary(['company_id', 'tag_id']);
+            // Should add ->unsigned() here https://youtu.be/tSmap9D-KCk?t=1937
+            // we are not using foreign keys and not referencing to the actual table
+            // $table->integer('company_id');
+            // $table->integer('tag_id');
+            // $table->primary(['company_id', 'tag_id']);
+
+            $table->integer('company_id')->unsigned();
+            $table->foreign('company_id')-references('id')->on('companies');
+
+            $table->integer('tag_id')->unsigned();
+            $table->foreign('tag_id')-references('id')->on('tags');
         });
     }
 

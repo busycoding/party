@@ -182,6 +182,19 @@
           </ul>
         </li>
         @endif
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-tag"></i> <span>Tags</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <!-- for some reason we don't need admin.party.index here -->
+            <li class="active"><a href="{{ route('admin.tags.index') }}"><i class="fa fa-circle-o"></i> View All</a></li>
+            <li><a href="{{ route('admin.tags.create') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
+          </ul>
+        </li>
         <li class="treeview" style="display:none;">
           <a href="#">
             <i class="fa fa-share"></i> <span>Multilevel</span>

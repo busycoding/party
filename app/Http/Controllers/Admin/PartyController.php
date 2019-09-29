@@ -217,7 +217,7 @@ class PartyController extends AdminController
 
         $company->update($data);
         $company->createTags($data['tags']);
-        
+
         if ($oldImage !== $company->image) {
             $this->removeImage($oldImage);
         }
@@ -233,13 +233,14 @@ class PartyController extends AdminController
     public function destroy($id)
     {
         Company::findOrFail($id)->delete();
-
         return redirect('/admin/party')->with('trash-message', ['Your company moved to Trash', $id]);
+        //return redirect()->route('admin.party')->with('trash-message', ['Your company moved to Trash', $id]);
     }
 
    public function forceDestroy($id)
     {
         $company = Company::withTrashed()->findOrFail($id);
+        $company->tags()->detach();
         $company->forceDelete();
 
         $this->removeImage($company->image);
