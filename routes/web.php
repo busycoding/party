@@ -85,3 +85,6 @@ Route::get('/admin/users/confirm/{user}', [
 Route::resource('/admin/users', 'Admin\UsersController');
 
 Route::resource('/admin/tags', 'Admin\TagController', ['as' => 'admin']);
+
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');

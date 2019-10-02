@@ -56,4 +56,8 @@ class User extends Authenticatable
 
         return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
     }
+
+    public function identities() {
+       return $this->hasMany('App\SocialIdentity');
+    }
 }
