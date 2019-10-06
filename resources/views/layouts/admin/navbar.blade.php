@@ -115,7 +115,7 @@
                 <img src="{{ $currentUser->gravatar() }}" class="img-circle" alt="{{ $currentUser->name}}">
 
                 <p>
-
+                  {{ $currentUser->name}} - {{ $currentUser->roles->first()->display_name }}
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>

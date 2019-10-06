@@ -58,6 +58,14 @@ Route::get('/admin/party/create',
 	['uses' => 'Admin\PartyController@create', 'as' => 'admin.party.create']
 );*/
 
+// TODO: move all the admin routes here inside the prefix
+
+/*Route::prefix('admin')->group(function(){
+	// Move all the admin routes here
+	//https://youtu.be/wD3_QlNwAog?t=1108
+});*/
+
+
 // for some reason {company does not work}
 Route::put('/admin/party/restore/{party}', [
     'uses' => 'Admin\PartyController@restore',

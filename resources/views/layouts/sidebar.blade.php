@@ -22,7 +22,7 @@
                                 @foreach ($categories as $category)
                                 <li>
                                     <a href="{{ route('category', $category->slug) }}"><i class="fa fa-angle-right"></i> {{ $category->title }}</a>
-                                    <span class="badge pull-right">{{ $category->companies->count() }}</span>
+                                    <span class="badge badge-secondary pull-right">{{ $category->companies->count() }}</span>
                                 </li>
                                 @endforeach
                             </ul>
@@ -78,7 +78,7 @@
                                 @foreach($archives as $archive)
                                     <li>
                                         <a href="{{ route('company', ['month' => $archive->month, 'year' => $archive->year]) }}">{{ $archive->month . " " . $archive->year }}</a>
-                                        <span class="badge pull-right">{{ $archive->company_count }}</span>
+                                        <span class="badge badge-secondary pull-right">{{ $archive->company_count }}</span>
                                     </li>
                                 @endforeach
                             </ul>

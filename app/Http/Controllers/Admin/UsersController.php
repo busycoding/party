@@ -51,7 +51,7 @@ class UsersController extends AdminController
         // $data['password'] = bcrypt($data['password']);
         // $user = User::create($data);
         // $user->attachRole($request->role_id);
-        
+        $request->password = Hash::make($request->password);
         $user = User::create($request->all());
         $user->attachRole($request->role);
 
@@ -125,7 +125,7 @@ class UsersController extends AdminController
                 'password_confirmation' => 'required_with:password|same:password'
             ]);
 
-            $password = $request->password;
+            $password = Hash::make($request->password);
             $user->update(['password' => $password ]);
         }
 
