@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+//use Illuminate\Support\Facades\Hash;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -51,7 +51,9 @@ class UsersController extends AdminController
         // $data['password'] = bcrypt($data['password']);
         // $user = User::create($data);
         // $user->attachRole($request->role_id);
-        $request->password = Hash::make($request->password);
+        
+        // Inside users we have a setPasswordAttribute that does a hash for the password, we don't need to do it here
+        //$request->password = Hash::make($request->password);
         $user = User::create($request->all());
         $user->attachRole($request->role);
 
@@ -77,11 +79,17 @@ class UsersController extends AdminController
      */
     public function edit($id)
     {
+        
+        
+        
         $user = User::findOrFail($id);
         $roles = Role::orderBy('name')->pluck('display_name', 'id');
         $user_role_id = $user->roles->first()->id;
+        // eager load
+        $user = User::where('id', $id)->with('roles')->first();
+        $all_roles = Role::all();
 
-        return view("admin.users.edit", compact('user', 'roles', 'user_role_id'));
+        return view("admin.users.edit", compact('user', 'roles', 'user_role_id', 'all_roles'));
     }
 
     /**
@@ -99,7 +107,7 @@ class UsersController extends AdminController
             'name'     => 'required|max:255',
             'email'    => 'email|required|max:255|unique:users,email,' . $id,
             'role'     => 'required',
-            'slug'     => 'required|unique:users'
+            'slug'     => 'required|unique:users,slug,' . $id
         ]);
 
         $name  = $request->name;
@@ -113,8 +121,10 @@ class UsersController extends AdminController
         $user->update(['name' => $name, 'email' => $email, 'role' => $role, 'slug' => $slug, 'bio' => $bio]);
 
         // $user->role
-        $user->detachRoles();
-        $user->attachRole($request->role);
+        // when we only had one role to add
+        //$user->detachRoles();
+        //$user->attachRole($request->role);
+        $user->syncRoles(explode(',', $request->roles));
 
         // $q = User::where('id','=',auth()->user()->id);
         // $q->update(['name'=>$name,'email'=>$email]);
@@ -125,7 +135,9 @@ class UsersController extends AdminController
                 'password_confirmation' => 'required_with:password|same:password'
             ]);
 
-            $password = Hash::make($request->password);
+            // Inside users we have a setPasswordAttribute that does a hash for the password, we don't need to do it here
+            //$password = Hash::make($request->password);
+            $password = $request->password;
             $user->update(['password' => $password ]);
         }
 

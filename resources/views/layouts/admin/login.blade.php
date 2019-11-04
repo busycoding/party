@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="{{ asset('admin/css/ionicons.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin/css/AdminLTE.min.css') }}">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{{ asset('admin/plugins/iCheck/square/blue.css') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,16 +35,6 @@
 <script src="{{ asset('admin/plugins/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('admin/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<!-- iCheck -->
-<script src="{{ asset('admin/plugins/iCheck/icheck.min.js') }}"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });
-</script>
+
 </body>
 </html>

@@ -14,7 +14,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url ('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('users.index') }}">Users</a></li>
+        <li><a href="{{ route('admin.users.index') }}">Users</a></li>
         <li class="active">Edit</li>
       </ol>
     </section>
@@ -36,9 +36,9 @@
           </div>
         </div>
         <div class="box-body">
-			<form action="{{ route('users.update', $user->id) }}" method="POST">
+			<form action="{{ route('admin.users.update', $user->id) }}" method="POST">
 				{{ method_field('PUT') }}
-				@include('admin.users.form')
+				@include('admin.users.form', ['hideRoleDropdown' => true])
             </form>
         </div>
         <!-- /.box-body -->
@@ -50,4 +50,12 @@
   </div>
   <!-- /.content-wrapper -->
 
+
+
+
 @endsection
+
+@section('scripts')
+
+@endsection
+

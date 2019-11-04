@@ -35,6 +35,11 @@ class User extends Authenticatable
         return $this->hasMany(Company::class, 'user_id');
     }
 
+/*    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = \Hash::make($password);
+    }*/
+
     public function setPasswordAttribute($value)
     {
         if (!empty($value)) $this->attributes['password'] = bcrypt($value);

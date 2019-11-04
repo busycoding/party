@@ -1,6 +1,6 @@
 @extends('layouts.admin.main')
 
-@section('title', 'Add New User')
+@section('title', 'Edit Permission')
 
 @section('content')
 
@@ -9,13 +9,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Companies
-        <small>Add New User</small>
+        Permissions
+        <small>Edit Permission</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url ('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('admin.users.index') }}">User</a></li>
-        <li class="active">Add New</li>
+        <li><a href="{{ route('admin.permissions.index') }}">Permissions</a></li>
+        <li class="active">Edit</li>
       </ol>
     </section>
 
@@ -36,9 +36,10 @@
           </div>
         </div>
         <div class="box-body">
-          <form method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
-            @include('admin.users.form')
-          </form>
+			<form action="{{ route('admin.permissions.update', $permission->id) }}" method="POST">
+				{{ method_field('PUT') }}
+				@include('admin.permissions.form')
+            </form>
         </div>
         <!-- /.box-body -->
       </div>
@@ -50,3 +51,5 @@
   <!-- /.content-wrapper -->
 
 @endsection
+
+@include('admin.permissions.script')

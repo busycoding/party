@@ -24,6 +24,13 @@
       </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
+--
+{{ Route::currentRouteNamed( 'admin.party.index' ) ?  'active' : '' }}--
+
+
+
+
+
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
@@ -34,7 +41,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/home/"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li><a href="{{ route('home') }}"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
             <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>
@@ -155,6 +162,7 @@
         @role('admin')
         @endrole
         @if (check_user_permissions(request(), "Categories@index"))
+        @endif
         <li class="treeview">
           <a href="#">
             <i class="fa fa-bars"></i> <span>Categories</span>
@@ -167,8 +175,8 @@
             <li><a href="{{ route('admin.categories.create') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
           </ul>
         </li>
-        @endif
         @if (check_user_permissions(request(), "Users@index"))
+        @endif
         <li class="treeview">
           <a href="#">
             <i class="fa fa-user"></i> <span>Users</span>
@@ -177,11 +185,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{ route('users.index') }}"><i class="fa fa-circle-o"></i> View All</a></li>
-            <li><a href="{{ route('users.create') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
+            <li class="active"><a href="{{ route('admin.users.index') }}"><i class="fa fa-circle-o"></i> View All</a></li>
+            <li><a href="{{ route('admin.users.create') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
           </ul>
         </li>
-        @endif
         <li class="treeview">
           <a href="#">
             <i class="fa fa-tag"></i> <span>Tags</span>
@@ -193,6 +200,32 @@
             <!-- for some reason we don't need admin.party.index here -->
             <li class="active"><a href="{{ route('admin.tags.index') }}"><i class="fa fa-circle-o"></i> View All</a></li>
             <li><a href="{{ route('admin.tags.create') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Roles</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <!-- for some reason we don't need admin.party.index here -->
+            <li class="active"><a href="{{ route('admin.roles.index') }}"><i class="fa fa-circle-o"></i> View All</a></li>
+            <li><a href="{{ route('admin.roles.create') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-key"></i> <span>Permissions</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <!-- for some reason we don't need admin.party.index here -->
+            <li class="active"><a href="{{ route('admin.permissions.index') }}"><i class="fa fa-circle-o"></i> View All</a></li>
+            <li><a href="{{ route('admin.permissions.create') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
           </ul>
         </li>
         <li class="treeview" style="display:none;">

@@ -1,9 +1,14 @@
+<div id="app2">
+
+<input v-model="messageT" placeholder="edit me">
+<p>Message is: @{{ messageT }}</p>
+
                 @csrf
 	            <div class="form-group row{{ $errors->has('title') ? ' has-error' : '' }}">
 	                <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
 
 	                <div class="col-md-6">
-	                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title', $company->title) }}" required autofocus>
+	                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title', $company->title) }}" required autofocus v-model="title">
 
 	                    @if ($errors->has('title'))
 	                        <span class="help-block" role="alert">
@@ -12,6 +17,11 @@
 	                    @endif
 	                </div>
 	            </div>
+
+	            <!-- title="something", hard codes title to 'something' string -->
+	            <!-- :title="something", title gets the view model title variable - 2 way binding, dynamically updates -->
+	            <slug-widget url="{{url('/')}}" subdirectory="party" :title="title" @slug-changed="updateSlug"></slug-widget>
+<input type="hidden" v-model="slug" name="slug" />
 	            <div class="form-group row{{ $errors->has('slug') ? ' has-error' : '' }}">
 	                <label for="slug" class="col-md-4 col-form-label text-md-right">{{ __('Slug') }}</label>
 
@@ -103,3 +113,40 @@
                         </button>
                     </div>
                 </div>
+
+</div>
+
+<div id='example-3'>
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+  <label for="jack">Jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+  <label for="john">John</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+  <label for="mike">Mike</label>
+  <br>
+  <span>Checked names: @{{ checkedNames }}</span>
+</div>
+                  <script src="{{ asset('js/app.js') }}"></script>
+
+<script type="text/javascript">
+
+    var app = new Vue({
+      el: '#app2',
+      data: {
+      	messageT: '',
+        title: '{{ old('title', $company->title) }}',
+        slug: '{{ old('title', $company->slug) }}'
+      },
+      methods: {
+        updateSlug: function(val) {
+          this.slug = val;
+        }
+      }
+    });
+    new Vue({
+  el: '#example-3',
+  data: {
+    checkedNames: []
+  }
+})
+  </script>

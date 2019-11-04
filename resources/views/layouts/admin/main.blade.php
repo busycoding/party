@@ -17,8 +17,6 @@
     <link rel="stylesheet" href="{{ asset('admin/css/ionicons.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin/css/AdminLTE.min.css') }}">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{{ asset('admin/plugins/iCheck/square/blue.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/skins/_all-skins.min.css') }}">
     <!-- Pace style -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/pace/pace.min.css') }}">
@@ -277,8 +275,7 @@
 <script src="{{ asset('admin/plugins/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('admin/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<!-- iCheck -->
-<script src="{{ asset('admin/plugins/iCheck/icheck.min.js') }}"></script>
+
 
 <script src="{{ asset('admin/pace/pace.min.js') }}"></script>
 <!-- SlimScroll -->
@@ -290,13 +287,11 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('admin/js/demo.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/js/jasny-bootstrap.min.js"></script>
+
+
 <script>
   $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
+
   });
   // To make Pace works on Ajax calls
   $(document).ajaxStart(function () {

@@ -1,3 +1,4 @@
+<div id="app">
                 @csrf
 	            <div class="form-group row{{ $errors->has('name') ? ' has-error' : '' }}">
 	                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -73,15 +74,16 @@
 
 	               		@if ($user->exists && ($user->id == config('cms.default_user_id') || isset($hideRoleDropdown)))
 			                <input id="role" type="hidden" name="role" value="{{ $user->roles->first()->id }}">
-			                <p class="form-control-static">{{ $user->roles->first()->display_name }}</p>
+			                <p class="form-control-static">{{ $user->roles->first() ? $user->roles->first()->display_name : '' }}</p>
 			            @else
-			                <select id="role" type="text" class="form-control" name="role">
+	               			<select id="role" type="text" class="form-control" name="role">
 			                    <option value="">Choose Role</option>
 			                    <!-- was $user->roles->first()->id $user->exists -->
 			                    @foreach ($roles as $key => $value)
 			                      <option value="{{$key}}"{{ old('role') == $key || $key == $user_role_id ? " selected" : "" }}>{{$value}}</option>
 			                    @endforeach
 			                </select>
+
 			            @endif
 
                       	@if ($errors->has('role'))
@@ -91,6 +93,20 @@
 	                    @endif
 	                </div>
 	            </div>
+
+{{$user->roles->count() == 0 ? 'This user has not been assigned any roles yet' : ''}}
+<ul>
+@foreach ($user->roles as $role)
+  <li>{{$role->display_name}}</li>
+@endforeach
+</ul>
+
+<input type="hidden" name="roles" :value="rolesSelected" />
+@foreach ($all_roles as $role)
+  <div class="field">
+    <input type="checkbox" v-model="rolesSelected" value="{{$role->id}}">{{$role->display_name}}
+  </div>
+@endforeach
 	            <div class="form-group row">
 	                <label for="bio" class="col-md-4 col-form-label text-md-right">{{ __('Bio') }}</label>
 
@@ -103,6 +119,18 @@
                         <button type="submit" class="btn btn-primary">
                             {{ $user->exists ? 'Update' : 'Save' }}
                         </button>
-                        <a href="{{ route('users.index')}}" class="btn btn-default">Cancel</a>
+                        <a href="{{ route('admin.users.index')}}" class="btn btn-default">Cancel</a>
                     </div>
                 </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data: {
+        rolesSelected: {!! $user->roles->pluck('id') !!}
+      }
+    });
+  </script>
+  <script src="{{ asset('js/app.js') }}"></script>

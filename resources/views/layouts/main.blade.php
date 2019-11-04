@@ -38,7 +38,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
               </li>
-              @if (!Auth::guest()) <!-- @guest -->
+              @if (@guest) <!-- !Auth::guest()  -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
@@ -54,8 +54,12 @@
                   <a class="dropdown-item" href="#"><span class="icon"><i class="fa fa-user-circle-o"></i></span> Profile</a>
                   <a class="dropdown-item" href="#"><span class="icon"><i class="fa fa-bell"></i></span> Notifications</a>
                   <a class="dropdown-item" href="#"><span class="icon"><i class="fa fa-cog"></i></span> Settings</a>
+                  <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><span class="icon"><i class="fa fa-sign-out"></i></span> Logout</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form>
+                  <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Sign out</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#"><span class="icon"><i class="fa fa-sign-out"></i></span> Logout</a>
                 </div>
               </li>
               @endif

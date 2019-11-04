@@ -14,7 +14,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url ('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('users.index') }}">User</a></li>
+        <li><a href="{{ route('admin.users.index') }}">User</a></li>
         <li class="active">Delete Confirm</li>
       </ol>
     </section>
@@ -36,8 +36,9 @@
           </div>
         </div>
         <div class="box-body">
-          <form method="POST" action="{{ route('users.destroy', $user->id) }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" enctype="multipart/form-data">
             {{ method_field('DELETE') }}
+            @csrf
               <div class="col-xs-9">
                   <div class="box">
                       <div class="box-body ">
@@ -70,7 +71,7 @@
                       </div>
                       <div class="box-footer">
                           <button type="submit" class="btn btn-danger">Confirm Deletion</button>
-                          <a href="{{ route('users.index') }}" class="btn btn-default">Cancel</a>
+                          <a href="{{ route('admin.users.index') }}" class="btn btn-default">Cancel</a>
                       </div>
                   </div>
               </div>

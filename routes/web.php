@@ -42,6 +42,32 @@ Route::get('/tag/{tag}',
 );
 Auth::routes();
 // change this to admin/ at some point
+
+Route::group(['prefix' => 'admin', 'middleware' => ['role:superadministrator|administrator|user']], function() {
+	// Route::resource('/admin/tags', 'Admin\TagController', ['as' => 'admin']);
+
+	// Route::get('/admin/users/confirm/{user}', [
+	//     'uses' => 'Admin\UsersController@confirm',
+	//     'as' => 'admin.users.confirm'
+	// ]);
+
+	// Route::resource('/admin/users', 'Admin\UsersController');
+
+	Route::resource('tags', 'Admin\TagController', ['as' => 'admin']);
+
+	Route::get('users/confirm/{user}', [
+	    'uses' => 'Admin\UsersController@confirm',
+	    'as' => 'admin.users.confirm'
+	]);
+
+	Route::resource('/users', 'Admin\UsersController', ['as' => 'admin']);
+
+	Route::resource('/permissions', 'Admin\PermissionController', ['as' => 'admin'], ['except' => 'destroy']);
+
+	Route::resource('/roles', 'Admin\RoleController', ['as' => 'admin'], ['except' => 'destroy']);
+});
+
+
 Route::get('/home', 'Admin\HomeController@index')->name('home');
 Route::get('/edit-account', 'Admin\HomeController@edit');
 Route::put('/edit-account', 'Admin\HomeController@update');
@@ -85,14 +111,8 @@ Route::resource('/admin/categories', 'Admin\CategoriesController', ['as' => 'adm
 /*Route::get('/admin/party/index', 'Admin\PartyController');
 Route::get('/admin/party/create', 'Admin\PartyController@create');*/
 
-Route::get('/admin/users/confirm/{user}', [
-    'uses' => 'Admin\UsersController@confirm',
-    'as' => 'admin.users.confirm'
-]);
-
-Route::resource('/admin/users', 'Admin\UsersController');
-
-Route::resource('/admin/tags', 'Admin\TagController', ['as' => 'admin']);
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');
+
+

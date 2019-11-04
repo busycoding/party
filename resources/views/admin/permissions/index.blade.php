@@ -1,6 +1,6 @@
 @extends('layouts.admin.main')
 
-@section('title', 'User List')
+@section('title', 'Permission List')
 
 @section('content')
 
@@ -9,13 +9,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Users
-        <small>Display All Users</small>
+        Permission
+        <small>Display All Permission</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url ('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('admin.users.index') }}">Users</a></li>
-        <li class="active">All Users</li>
+        <li><a href="{{ route('admin.permissions.index') }}">Permission</a></li>
+        <li class="active">All Permission</li>
       </ol>
     </section>
 
@@ -35,7 +35,7 @@
 
           </div>
 			<div class="pull-left">
-				<br><br><a href="{{ route('admin.users.create') }}" class="btn btn-success">Add New</a>
+				<br><br><a href="{{ route('admin.permissions.create') }}" class="btn btn-success">Add New</a>
 			</div>
 
       <div class="pull-right">
@@ -44,23 +44,23 @@
         </div>
         <div class="box-body">
           @include('admin.partials.message')
-          @if (!$users->count())
+          @if (!$permissions->count())
   			    <div class="alert alert-danger">
   			        <strong>No record found</strong>
   			    </div>
           @else
-              @include('admin.users.table')
+              @include('admin.permissions.table')
   		    @endif
         </div>
         <!-- /.box-body -->
         <div class="box-footer clearfix">
 			<div class="pull-left">
         <!-- appends is needed, if you are in trash, click page 2, you will be put into company index -->
-                {{ $users->appends( Request::query() )->render() }}
+                {{ $permissions->appends( Request::query() )->render() }}
             </div>
             <div class="pull-right">
-                <?php //$usersCount = $users->count() ?>
-                <small>{{ $usersCount }} {{ str_plural('Item', $usersCount) }}</small>
+                <?php //$permissionCount = $permission->count() ?>
+                <small>{{ $permissionsCount }} {{ str_plural('Item', $permissionsCount) }}</small>
             </div>
         </div>
         <!-- /.box-footer-->
