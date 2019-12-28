@@ -21,11 +21,12 @@ class CreateCommentsTable extends Migration
             $table->timestamps();
             
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
-
-            Schema::table('comments', function($table) {
-                $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
-            });
         });
+
+        Schema::table('comments', function($table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+        });
+
     }
 
     /**

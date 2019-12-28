@@ -25,10 +25,11 @@ class CommentsTableSeeder extends Seeder
                 $commentDate = $company->created_at->modify("+{$i} hours");
 
                 $comments[] = [
-                    'user_name' => $faker->name,
-                    'user_email' => $faker->email,
-                    'user_url' => $faker->domainName,
-                    'body' => $faker->paragraphs(rand(1, 5), true),
+                    //'user_name' => $faker->name,
+                    //'user_email' => $faker->email,
+                    //'user_url' => $faker->domainName,
+                    'user_id' => 1,
+                    'comment' => $faker->paragraphs(rand(1, 5), true),
                     'company_id' => $company->id,
                     'created_at' => $commentDate,
                     'updated_at' => $commentDate,

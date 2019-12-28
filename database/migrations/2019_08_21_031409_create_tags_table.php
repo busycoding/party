@@ -33,10 +33,10 @@ class CreateTagsTable extends Migration
             // $table->primary(['company_id', 'tag_id']);
 
             $table->integer('company_id')->unsigned();
-            $table->foreign('company_id')-references('id')->on('companies');
+            $table->foreign('company_id')->references('id')->on('companies')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('tag_id')->unsigned();
-            $table->foreign('tag_id')-references('id')->on('tags');
+            $table->foreign('tag_id')->references('id')->on('tags')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
