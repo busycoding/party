@@ -46,7 +46,7 @@
                               <i class="fa fa-clone"></i>
                               <?php $companyCountOld = $user->companies->count() ?>
                               <?php $companyCount = $user->companies()->approved()->count() ?>
-                              {{ $companyCount }} {{ str_plural('companies', $companyCount) }}
+                              {{ $companyCount }} {{ \Illuminate\Support\Str::plural('companies', $companyCount) }}
                           </a>
                         </div>
                         {!! $user->bio_html !!}

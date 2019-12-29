@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use GrahamCampbell\Markdown\Facades\Markdown;
+use Illuminate\Support\Str;
 
 class Company extends Model
 {
@@ -45,7 +46,7 @@ class Company extends Model
     {
         $commentsNumber = $this->comments->count();
 
-        return $commentsNumber . " " . str_plural($label, $commentsNumber);
+        return $commentsNumber . " " . Str::plural($label, $commentsNumber);
     }
 
     public function createComment(array $data)

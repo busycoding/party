@@ -60,7 +60,7 @@
             </div>
             <div class="pull-right">
                 <?php //$permissionCount = $permission->count() ?>
-                <small>{{ $rolesCount }} {{ str_plural('Item', $rolesCount) }}</small>
+                <small>{{ $rolesCount }} {{ \Illuminate\Support\Str::plural('Item', $rolesCount) }}</small>
             </div>
         </div>
         <!-- /.box-footer-->

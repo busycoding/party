@@ -33,7 +33,13 @@
                                 <div class="post-meta padding-10 clearfix">
                                     <div class="pull-left">
                                         <ul class="post-meta-group">
-                                            <li><i class="fa fa-user"></i><a href="{{ route('user', $company->user->slug) }}"> {{ $company->user->name }}</a></li>
+                                            <li>
+                                                @if(!empty($company->user->slug))
+                                                    <i class="fa fa-user"></i><a href="{{ route('user', $company->user->slug) }}"> {{ $company->user->name }}</a>
+                                                @else
+                                                    <i class="fa fa-user"></i> {{ $company->user->name }}
+                                                @endif
+                                            </li>
                                             <li><i class="fa fa-clock-o"></i><time> <span style="display:none;">{{$company->created_at->diffForHumans()}}</span>{{ $company->date }}</time></li>
                                             <li><i class="fa fa-tags"></i><a href="{{ route('category', $company->category->slug) }}"> {{ $company->category->title }}</a></li>
                                             <!-- Company model getTagsHtmlAttribute -->

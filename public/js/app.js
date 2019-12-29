@@ -50450,8 +50450,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Bitnami\wampstack-7.1.25-0\apache2\htdocs\party\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Bitnami\wampstack-7.1.25-0\apache2\htdocs\party\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! c:\xampp\htdocs\party\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! c:\xampp\htdocs\party\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

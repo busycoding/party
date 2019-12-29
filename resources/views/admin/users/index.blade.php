@@ -60,7 +60,7 @@
             </div>
             <div class="pull-right">
                 <?php //$usersCount = $users->count() ?>
-                <small>{{ $usersCount }} {{ str_plural('Item', $usersCount) }}</small>
+                <small>{{ $usersCount }} {{ \Illuminate\Support\Str::plural('Item', $usersCount) }}</small>
             </div>
         </div>
         <!-- /.box-footer-->

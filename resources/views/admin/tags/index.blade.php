@@ -60,7 +60,7 @@
             </div>
             <div class="pull-right">
                 <?php //$tagsCount = $tags->count() ?>
-                <small>{{ $tagsCount }} {{ str_plural('Item', $tagsCount) }}</small>
+                <small>{{ $tagsCount }} {{ \Illuminate\Support\Str::plural('Item', $tagsCount) }}</small>
             </div>
         </div>
         <!-- /.box-footer-->
